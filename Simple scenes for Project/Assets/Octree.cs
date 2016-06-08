@@ -29,4 +29,9 @@ public class Octree {
 	public void OnPostRender(){
 		root.OnPostRender ();
 	}
+
+	public List<GameObject> RetrievePotentialCollisions(GameObject gameObject) {
+		List<GameObject> potentialCollisions = new List<GameObject> ();
+		return root.RetrievePotentialCollisions (gameObject, potentialCollisions);
+	}
 }

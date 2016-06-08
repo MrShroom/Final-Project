@@ -142,6 +142,18 @@ public class OctreeNode {
 
 	}
 
+	public List<GameObject> RetrievePotentialCollisions(GameObject gameObject, List<GameObject> potentialCollisions) {
+		if(!isLeaf)
+			foreach(OctreeNode c in children) 
+				if(c.bounds.Intersects(gameObject.GetComponent<Collider>().bounds))
+					c.RetrievePotentialCollisions(gameObject, potentialCollisions);
+		
+		potentialCollisions.AddRange (objects);
+
+		return potentialCollisions;
+	}
+
+
 	private bool IsEmpty(){
 		return isLeaf && objects.Count == 0;
 	}
@@ -151,9 +163,7 @@ public class OctreeNode {
 	public void OnPostRender() {
 		Material outlineMaterial = new Material(Shader.Find("Diffuse"));
 		outlineMaterial.SetPass (0);
-
-
-
+		
 		GL.Begin (GL.LINES);
 		GL.Color (new Color (1, 1, 1, 1));
 

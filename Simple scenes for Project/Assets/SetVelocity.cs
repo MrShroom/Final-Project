@@ -42,8 +42,8 @@ public class SetVelocity : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col)
 	{
-		if(col.gameObject.CompareTag("Sphere") && GameObject.FindSceneObjectsOfType(typeof (GameObject)).Length < 50)
-			Instantiate(newSphere);
+		//if(col.gameObject.CompareTag("Sphere") && GameObject.FindSceneObjectsOfType(typeof (GameObject)).Length < 50)
+		//	Instantiate(newSphere);
 		
 	}
 }

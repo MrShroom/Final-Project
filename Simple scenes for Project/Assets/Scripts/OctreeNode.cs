@@ -142,11 +142,11 @@ public class OctreeNode {
 
 	}
 
-	public List<GameObject> RetrievePotentialCollisions(GameObject gameObject, List<GameObject> potentialCollisions) {
+	public List<GameObject> RetrievePotentialCollisions(GameObject gameObject, ref List<GameObject> potentialCollisions) {
 		if(!isLeaf)
 			foreach(OctreeNode c in children) 
-				if(c.bounds.Intersects(gameObject.GetComponent<Collider>().bounds))
-					c.RetrievePotentialCollisions(gameObject, potentialCollisions);
+				if(gameObject.GetComponent<Collider>().bounds.Intersects (c.bounds))
+					c.RetrievePotentialCollisions(gameObject,ref potentialCollisions);
 		
 		potentialCollisions.AddRange (objects);
 

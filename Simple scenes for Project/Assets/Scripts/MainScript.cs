@@ -11,7 +11,7 @@ public class MainScript : MonoBehaviour {
 		if (MainScript.octree != null)
 			throw new UnityException ("Octree already exists.");
 
-		MainScript.octree = new Octree (new Bounds (new Vector3(0,50,0), new Vector3 (100, 100, 100)), 6);
+		MainScript.octree = new Octree (new Bounds (new Vector3(0,50,0), new Vector3 (100, 100, 100)), 2);
 	}
 
 	public void Start(){

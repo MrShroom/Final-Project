@@ -5,11 +5,8 @@ using System.Collections.Generic;
 public class Octree {
 
 	private OctreeNode root;
-
-	private int maxDepth;
-
+	
 	public Octree(Bounds b, int maxDepth){
-		this.maxDepth = maxDepth;
 		root = new OctreeNode (b, 0, maxDepth);
 	}
 
@@ -30,8 +27,7 @@ public class Octree {
 		root.OnPostRender ();
 	}
 
-	public List<GameObject> RetrievePotentialCollisions(GameObject gameObject) {
-		List<GameObject> potentialCollisions = new List<GameObject> ();
-		return root.RetrievePotentialCollisions (gameObject, potentialCollisions);
+	public List<GameObject> RetrievePotentialCollisions(GameObject gameObject, ref List<GameObject> potentialCollisions) {
+		return root.RetrievePotentialCollisions (gameObject, ref potentialCollisions);
 	}
 }

@@ -7,12 +7,10 @@ public class CollisionCheck : MonoBehaviour {
 
 	private float runningAverage;
 	private int averageUpdateTimer;
+	private int ChecksPerFrame;
+
 	public bool UseOctree = false;
 	public Text counter, averageCounter;
-	
-	[HideInInspector]
-	static public int ChecksPerFrame;
-
 
 	public void UpdateCounter(int count){
 		counter.text = count.ToString ();

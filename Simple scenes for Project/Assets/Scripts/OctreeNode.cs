@@ -10,7 +10,6 @@ public class OctreeNode {
 	private List<GameObject> objects;
 	private OctreeNode[] children;
 	private Bounds bounds;
-	//public ReadOnlyCollectionBase<GameObject> contents
 
 	public OctreeNode(Bounds b, int depth, int maxDepth) {
 		this.depth = depth;
@@ -97,7 +96,6 @@ public class OctreeNode {
 
 	public void Remove(GameObject gameObject){
 		//if we find the object in this node, remove it
-
 		GameObject g = null;
 
 		foreach (GameObject o in objects)
@@ -107,45 +105,53 @@ public class OctreeNode {
 		if (g != null)
 			objects.Remove (g);
 
-		//else try to find it in the children
-		//then once we find the node
+		//Recursively check children to find nodes that also contain this object
+		//then once we find the nodes, restructure the sub tree if necessary
+		if (!isLeaf) {
+			RestructureSubTree(gameObject);
+		}
+	}
+
+	private void RestructureSubTree(GameObject gameObject){
+		//call remove on every child
 		//if this node has children, check for empty children and adjust the tree as needed
 		//if all are empty, mark as leaf and create new children
 		//if all but one are empty, copy the objects into this node, mark as leaf, create new children
-		if (!isLeaf) {
-			int emptyChildren = 0;
-			bool hasFloater = true;
-			List<GameObject> floaters = null;
 
-			foreach (OctreeNode c in children) {
-				c.Remove (gameObject);
-
-				if (c.IsEmpty())
-					++emptyChildren;
-				else if (c.isLeaf){
-					if (floaters == null)
-						floaters = c.objects;
-					else if(!floaters.Equals (c.objects))
-						hasFloater = false;
-				} else {
-					hasFloater = false;
-				}
-
+		int emptyChildren = 0;
+		bool hasSingleUsedChild = true;
+		List<GameObject> floatingObjects = null;
+		
+		foreach (OctreeNode c in children) {
+			c.Remove (gameObject);
+			
+			if (c.IsEmpty())
+				++emptyChildren;
+			else if (c.isLeaf){
+				if (floatingObjects == null)
+					floatingObjects = c.objects;
+				else if(!floatingObjects.Equals (c.objects))
+					hasSingleUsedChild = false;
+			} else {
+				hasSingleUsedChild = false;
 			}
-			if (emptyChildren == 8) {
-				isLeaf = true;
-				children = new OctreeNode[8];
-			} else if (hasFloater && objects.Count == 0) {
-				foreach(GameObject obj in floaters)
-					objects.Add (obj);
-
-				isLeaf = true;
-				children = new OctreeNode[8];
-			}
-
+			
 		}
 
+		if (emptyChildren == 8) {
+			isLeaf = true;
+			children = new OctreeNode[8];
+		} else if (hasSingleUsedChild && objects.Count == 0) {
+			foreach(GameObject obj in floatingObjects)
+				objects.Add (obj);		
+			isLeaf = true;
+			children = new OctreeNode[8];
+		}
+		//else
+		//there is more than one child being used
+		//leave the tree as it is
 	}
+
 
 	public List<GameObject> RetrievePotentialCollisions(GameObject gameObject, ref List<GameObject> potentialCollisions) {
 		if(!isLeaf)
@@ -163,7 +169,6 @@ public class OctreeNode {
 		return isLeaf && objects.Count == 0;
 	}
 
-	private static Material _LineMaterial;
 
 	public void OnPostRender() {
 		Material outlineMaterial = new Material(Shader.Find("Diffuse"));

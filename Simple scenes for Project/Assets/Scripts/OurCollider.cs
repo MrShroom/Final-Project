@@ -2,7 +2,10 @@
 using System.Collections;
 
 public class OurCollider : MonoBehaviour {
-	
+	//Note: For demo scene, planes are assumed to be at position (0,0,0) with normal facing upward
+	//To check other planes, create a component with a Plane struct holding position and normal, attach to plane prefab,
+	//and retrieve every check
+
 	bool SphereCollision(GameObject o){
 		if (o.tag == "Sphere") {
 			Vector3 distanceBetweenCenters = transform.position - o.transform.position;
@@ -20,11 +23,12 @@ public class OurCollider : MonoBehaviour {
 
 			Bounds b = o.GetComponent<BoxCollider>().bounds;
 
-
+			//distance to centers
 			float xDist = Mathf.Abs(transform.position.x - o.transform.position.x);
 			float yDist = Mathf.Abs(transform.position.y - o.transform.position.y);
 			float zDist = Mathf.Abs(transform.position.z - o.transform.position.z);
 
+			//radius + size check
 			if(xDist >= (b.size.x + GetComponent<SphereCollider>().radius)) return false;
 			if(yDist >= (b.size.y + GetComponent<SphereCollider>().radius)) return false;
 			if(zDist >= (b.size.z + GetComponent<SphereCollider>().radius)) return false;
@@ -33,6 +37,7 @@ public class OurCollider : MonoBehaviour {
 			if(yDist < b.size.y) return true;
 			if(zDist < b.size.z) return true;
 
+			//check corners
 			float squaredDistance = Mathf.Pow ((xDist - b.size.x), 2) + 
 									Mathf.Pow ((yDist - b.size.y), 2) + 
 									Mathf.Pow ((zDist - b.size.z), 2); 
@@ -51,7 +56,7 @@ public class OurCollider : MonoBehaviour {
 			return o.GetComponent<OurCollider>().PlaneCollision(this.gameObject);
 		}
 		if (o.tag == "Box") {
-
+			//classic AABB check for each dimension
 			Vector3 thisMin = GetComponent<BoxCollider>().bounds.min;
 			Vector3 oMin = o.GetComponent<BoxCollider>().bounds.min;
 
@@ -76,6 +81,8 @@ public class OurCollider : MonoBehaviour {
 			return false;
 		}
 		if (o.tag == "Box") {
+			//if the min and max corners of the box "sandwich" the plane
+			//they intersect
 			Vector3 cornerA = o.transform.position;
 			Vector3 cornerB = o.transform.position;
 			cornerA += o.GetComponent<BoxCollider>().size / 2;

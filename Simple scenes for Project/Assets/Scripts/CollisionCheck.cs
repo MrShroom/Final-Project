@@ -30,6 +30,8 @@ public class CollisionCheck : MonoBehaviour {
 					GameObject g = r.gameObject;
 					if(g == o) continue;
 					else if(o.GetComponent<OurCollider>().doesCollide (g)){
+						if(o.GetComponent<Renderer>())
+						o.GetComponent<Renderer> ().material.SetColor ("_Color", new Color (Random.Range (0f, 1f), Random.Range (0f, 1f), Random.Range (0f, 1f)));
 						//print ("Collision");
 					}
 					++ChecksPerFrame;
@@ -44,6 +46,8 @@ public class CollisionCheck : MonoBehaviour {
 				foreach(GameObject g in potentialCollisions){
 					if(g == o) continue;
 					else if(o.GetComponent<OurCollider>().doesCollide (g)){
+						if(o.GetComponent<Renderer>())
+							o.GetComponent<Renderer>().material.SetColor ("_Color", new Color (Random.Range (0f, 1f), Random.Range (0f, 1f), Random.Range (0f, 1f)));
 						//print ("Collision");
 					}
 					++ChecksPerFrame;

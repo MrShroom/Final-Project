@@ -33,10 +33,10 @@ public class OurCollider : MonoBehaviour {
 	
 	bool BoxCollision(GameObject o){
 		if (o.tag == "Sphere") {
-			return SphereCollision (this.gameObject);
+			return o.GetComponent<OurCollider>().SphereCollision(this.gameObject);
 		}
 		if (o.tag == "Plane") {
-			return PlaneCollision (this.gameObject);
+			return o.GetComponent<OurCollider>().PlaneCollision(this.gameObject);
 		}
 		if (o.tag == "Box") {
 			Plane p = new Plane(new Vector3(0,1,0), new Vector3(0,0,0));

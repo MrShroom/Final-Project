@@ -1,0 +1,43 @@
+Initialize engine version: 5.2.1f1 (44735ea161b3)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics Family (ID=0xa16)
+    Vendor:   Intel
+    VRAM:     896 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.184 seconds
+desktop: 2160x1440 59Hz; virtual: 2160x1440 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Matt\Desktop\Final\Final-Project\Simple scenes for Project\OctreeDemo_Data\Managed\System.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 22f8 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.267103 ms
+UnityException: Octree already exists.
+  at MainScript.Awake () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+
+Unloading 11731 unused Assets to reduce memory usage. Loaded Objects now: 272.
+Total: 5.208617 ms (FindLiveObjects: 0.858865 ms CreateObjectMapping: 1.416799 ms MarkObjects: 0.260697 ms  DeleteObjects: 2.655011 ms)
+

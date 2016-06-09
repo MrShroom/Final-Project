@@ -9,7 +9,7 @@ public class CollisionCheck : MonoBehaviour {
 	private int averageUpdateTimer;
 	private int ChecksPerFrame;
 
-	public bool UseOctree = false;
+	public bool UseOctree = true;
 	public Text counter, averageCounter;
 
 	public void UpdateCounter(int count){
@@ -77,6 +77,7 @@ public class CollisionCheck : MonoBehaviour {
 	public void Start(){
 		ChecksPerFrame = 0;
 		averageUpdateTimer = 0;
+		UseOctree = true;
 	}
 
 	// Update is called once per frame
@@ -94,5 +95,9 @@ public class CollisionCheck : MonoBehaviour {
 			averageUpdateTimer = 0;
 			runningAverage = 0f;
 		}
+
+		if (Input.GetKeyDown (KeyCode.Space))
+			OctreeToggle ();
+
 	}
 }

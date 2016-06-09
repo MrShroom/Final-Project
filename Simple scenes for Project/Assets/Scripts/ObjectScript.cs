@@ -19,18 +19,18 @@ public class ObjectScript : MonoBehaviour {
 		transform.position += velocity * Time.deltaTime;
 
 		if (transform.position.x > MainScript.octree.bounds.max.x)
-			velocity.x *= -1;
+			velocity.x = Mathf.Abs (velocity.x) * -1;
 		if (transform.position.y > MainScript.octree.bounds.max.y)
-			velocity.y *= -1;
+			velocity.y = Mathf.Abs (velocity.y) * -1;;
 		if (transform.position.z > MainScript.octree.bounds.max.z)
-			velocity.z *= -1;
+			velocity.z = Mathf.Abs (velocity.z) * -1;;
 
 		if (transform.position.x < MainScript.octree.bounds.min.x)
-			velocity.x *= -1;
+			velocity.x = Mathf.Abs (velocity.x);
 		if (transform.position.y < MainScript.octree.bounds.min.y)
-			velocity.y *= -1;
+			velocity.y = Mathf.Abs (velocity.y);
 		if (transform.position.z < MainScript.octree.bounds.min.z)
-			velocity.z *= -1;
+			velocity.z = Mathf.Abs (velocity.z);
 
 	}
 

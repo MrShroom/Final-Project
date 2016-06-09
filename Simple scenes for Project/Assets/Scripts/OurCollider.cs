@@ -6,7 +6,7 @@ public class OurCollider : MonoBehaviour {
 	bool SphereCollision(GameObject o){
 		if (o.tag == "Sphere") {
 			Vector3 distanceBetweenCenters = transform.position - o.transform.position;
-			float sumOfRadii = GetComponent<SphereCollider>().radius + o.GetComponent<SphereCollider>().radius;
+			float sumOfRadii = GetComponent<SphereCollider>().radius * transform.lossyScale.x + o.GetComponent<SphereCollider>().radius * transform.lossyScale.x;
 			if(distanceBetweenCenters.magnitude <= sumOfRadii)
 				return true;
 		}

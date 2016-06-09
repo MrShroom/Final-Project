@@ -22,6 +22,10 @@ public class CollisionCheck : MonoBehaviour {
 		averageCounter.text = runningAverage.ToString ();
 	}
 
+	public void OctreeToggle(){
+		UseOctree = !UseOctree;
+	}
+
 	void BruteForceCollisionCheck(){
 		foreach (Transform t in transform) {
 			GameObject o = t.gameObject;

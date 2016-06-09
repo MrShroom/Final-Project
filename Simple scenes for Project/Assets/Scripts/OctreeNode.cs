@@ -10,8 +10,10 @@ public class OctreeNode {
 	private List<GameObject> objects;
 	private OctreeNode[] children;
 	private Bounds bounds;
+	private int maxObjectsPerNode;
 
 	public OctreeNode(Bounds b, int depth, int maxDepth) {
+		maxObjectsPerNode = 1;
 		this.depth = depth;
 		this.maxDepth = maxDepth;
 		isLeaf = true;
@@ -31,7 +33,7 @@ public class OctreeNode {
 			return;
 
 		//if we're at an empty leaf node or the max depth of the tree, add the object
-		if (isLeaf && objects.Count == 0 || depth == maxDepth)
+		if (isLeaf && objects.Count < maxObjectsPerNode || depth == maxDepth)
 			objects.Add (gameObject);
 
 		//else create the children and push down the objects to the next level
@@ -40,7 +42,7 @@ public class OctreeNode {
 			//if the object is in the center of this node or if it has the same center as all other items in this node
 			//add it here
 			if (objectBounds.center.Equals (bounds.center) ||
-				objects.Count > 0 && objects.TrueForAll (i => objectBounds.center.Equals (i.GetComponent<Collider> ().bounds.center)))
+				objects.Count >= maxObjectsPerNode && objects.TrueForAll (i => objectBounds.center.Equals (i.GetComponent<Collider> ().bounds.center)))
 				objects.Add (gameObject);
 
 			//else build out the new leaf nodes

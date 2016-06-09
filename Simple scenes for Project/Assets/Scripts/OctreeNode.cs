@@ -24,20 +24,26 @@ public class OctreeNode {
 	public void Add(GameObject gameObject){
 		//Bounds objectBounds = gameObject.GetComponent<Bounds> ();
 		Bounds objectBounds = gameObject.GetComponent<Collider> ().bounds;
+
 		//the octree should encompass all objects in the game world
 		//so disallow objects that exist outside of it
-		if(!bounds.Intersects(objectBounds))
-			throw new UnityException("Object exists outside of octree");
+		if (!bounds.Intersects (objectBounds))
+			//throw new UnityException("Object exists outside of octree");
+			return;
+
 		//if we're at an empty leaf node or the max depth of the tree, add the object
 		if (isLeaf && objects.Count == 0 || depth == maxDepth)
 			objects.Add (gameObject);
+
 		//else create the children and push down the objects to the next level
 		else {
+
 			//if the object is in the center of this node or if it has the same center as all other items in this node
 			//add it here
 			if (objectBounds.center.Equals (bounds.center) ||
 				objects.Count > 0 && objects.TrueForAll (i => objectBounds.center.Equals (i.GetComponent<Collider> ().bounds.center)))
 				objects.Add (gameObject);
+
 			//else build out the new leaf nodes
 			//push all the objects in this node down to their new nodes
 			//and find the child to place the new object into
@@ -75,7 +81,6 @@ public class OctreeNode {
 			if(!objectBounds.center.Equals (bounds.center)) {
 				AddToChildren(o);
 				toRemove.Add (o);
-				//objects.Remove(o);
 			}
 		}
 

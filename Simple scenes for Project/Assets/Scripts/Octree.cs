@@ -5,9 +5,11 @@ using System.Collections.Generic;
 public class Octree {
 
 	private OctreeNode root;
-	
+	public Bounds bounds;
+
 	public Octree(Bounds b, int maxDepth){
 		root = new OctreeNode (b, 0, maxDepth);
+		bounds = b;
 	}
 
 	public void Add(GameObject gameObject){

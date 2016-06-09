@@ -5,16 +5,22 @@ using UnityEngine.UI;
 
 public class CollisionCheck : MonoBehaviour {
 
+	private float runningAverage;
+	private int averageUpdateTimer;
 	public bool UseOctree = false;
+	public Text counter, averageCounter;
+	
 	[HideInInspector]
 	static public int ChecksPerFrame;
 
-	public Text counter;
-	
+
 	public void UpdateCounter(int count){
 		counter.text = count.ToString ();
 	}
 
+	public void UpdateAverageCounter(){
+		averageCounter.text = runningAverage.ToString ();
+	}
 
 	void BruteForceCollisionCheck(){
 		foreach (Transform t in transform) {
@@ -56,17 +62,31 @@ public class CollisionCheck : MonoBehaviour {
 		}
 	}
 
+	void CalculateAverage(float checksThisFrame){
+		runningAverage += checksThisFrame;
+		runningAverage /= 2.0f;
+
+	}
+
 	public void Start(){
 		ChecksPerFrame = 0;
+		averageUpdateTimer = 0;
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
+		averageUpdateTimer++;
 		ChecksPerFrame = 0;
 		if (!UseOctree)
 			BruteForceCollisionCheck ();
 		else 
-			OctreeCollisionCheck();
+			OctreeCollisionCheck ();
 		UpdateCounter (ChecksPerFrame);
+		CalculateAverage (ChecksPerFrame);
+		if (averageUpdateTimer >= 120) {
+			UpdateAverageCounter ();
+			averageUpdateTimer = 0;
+			runningAverage = 0f;
+		}
 	}
 }
